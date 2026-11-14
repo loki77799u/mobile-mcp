@@ -1,0 +1,40 @@
+{
+  "package_name": "com.openai.chatgpt",
+  "version": "1.2.0",
+  "updated_at": "2026-11-14T02:00:00.000Z",
+  "provenance": {
+    "source": "Retest 2026-11-14 evidence analysis",
+    "device_tested": "USB Android 49211FDAS00094",
+    "status": "validated_observations"
+  },
+  "guidance": [
+    "mobile_type_keys once changed 'v1.2' to 'v1. 2'; exact clipboard paste plus text comparison avoided this.",
+    "The accessibility tree header contains '[focused]'; focus checks must inspect the EditText node itself.",
+    "Think harder selection cleared after responses; required state must be checked before each send.",
+    "OFF still allowed 'Worked' sections and tool activity; do not equate the switch with absence of internal reasoning.",
+    "Final answer text must be distinguished from thinking/tool UI.",
+    "Accessibility sometimes exposes complete offscreen reply text, avoiding needless scrolling.",
+    "Project instructions accepted 7,891 characters without displaying a counter; report absent counters honestly.",
+    "Source-file selection sometimes uploaded immediately without a separate Select button; verify the resulting Sources list.",
+    "New chats in the same Project may share context.",
+    "'Get Plus' or 'Upgrade plan' is not an explicit current-plan label; infer Free plan cautiously.",
+    "Read current trees instead of storing screen coordinates."
+  ],
+  "selectors": {
+    "composer_edit_text": {
+      "role": "EditText",
+      "editable": true,
+      "hint": "Inspect element node itself for focused=true, not tree header"
+    },
+    "attachment_button": {
+      "label": "Attachment",
+      "clickable": true
+    },
+    "reply_container": {
+      "label": "Reply to ChatGPT"
+    },
+    "think_harder_menu_item": {
+      "label_contains": "Think"
+    }
+  }
+}

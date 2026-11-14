@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "name": "chatgpt-verified-paste",
+  "description": "Exact clipboard paste into ChatGPT composer with node-level focus check and readback comparison",
+  "package_name": "com.openai.chatgpt",
+  "version": "1.0.0",
+  "validation_status": "validated",
+  "provenance": {
+    "author": "agent",
+    "created_at": "2026-11-14T02:00:00.000Z",
+    "source_session": "chatgpt-retest-2026-11-14",
+    "notes": "Verified against 7,891 character instructions and script messages with zero space corruption"
+  },
+  "params": {
+    "text": {
+      "type": "string",
+      "description": "Exact text content to paste and verify",
+      "required": true
+    }
+  },
+  "preconditions": {
+    "package_foreground": "com.openai.chatgpt"
+  },
+  "steps": [
+    {
+      "id": 1,
+      "action": "helper_insert_text",
+      "note": "Verify EditText node focus, paste text via clipboard, and verify readback",
+      "params": {
+        "text": "{{text}}",
+        "target_selector": {
+          "role": "EditText",
+          "editable": true
+        }
+      },
+      "wait_after": {
+        "condition": "element_text_matches",
+        "value": "{{text}}",
+        "timeout_ms": 5000
+      }
+    }
+  ],
+  "postconditions": {
+    "element_exists": {
+      "role": "EditText",
+      "text": "{{text}}"
+    }
+  },
+  "on_failure": "stop"
+}

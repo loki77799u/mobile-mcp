@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "name": "chatgpt-send-prompt",
+  "description": "Prepares and verifies prompt insertion with node focus and thinking mode state check before send",
+  "package_name": "com.openai.chatgpt",
+  "version": "1.0.0",
+  "validation_status": "validated",
+  "provenance": {
+    "author": "agent",
+    "created_at": "2026-11-14T02:00:00.000Z",
+    "notes": "Ensures prompt is verified in field and thinking state is verified before sending"
+  },
+  "params": {
+    "prompt_text": {
+      "type": "string",
+      "description": "Prompt text to insert and verify",
+      "required": true
+    },
+    "thinking_mode": {
+      "type": "string",
+      "description": "Thinking mode state: 'on' or 'off'",
+      "required": false,
+      "default": "on"
+    }
+  },
+  "preconditions": {
+    "package_foreground": "com.openai.chatgpt"
+  },
+  "steps": [
+    {
+      "id": 1,
+      "action": "helper_thinking_state",
+      "note": "Verify and set thinking mode switch state",
+      "params": {
+        "desired_state": "{{thinking_mode}}"
+      }
+    },
+    {
+      "id": 2,
+      "action": "helper_insert_text",
+      "note": "Insert prompt text via verified clipboard paste with readback comparison",
+      "params": {
+        "text": "{{prompt_text}}",
+        "target_selector": {
+          "role": "EditText",
+          "editable": true
+        }
+      },
+      "wait_after": {
+        "condition": "element_text_matches",
+        "value": "{{prompt_text}}",
+        "timeout_ms": 5000
+      }
+    }
+  ],
+  "postconditions": {
+    "element_exists": {
+      "role": "EditText",
+      "text": "{{prompt_text}}"
+    }
+  },
+  "on_failure": "stop"
+}

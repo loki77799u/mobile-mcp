@@ -1,0 +1,26 @@
+{
+  "name": "mobile-mcp-recipe-server",
+  "version": "1.0.0",
+  "description": "Client-independent recipe and operational guidance extension for Mobile MCP, based on Ghost OS architecture",
+  "main": "src/index.js",
+  "bin": {
+    "mobile-mcp-recipe-server": "bin/mobile-mcp-recipe-server.js"
+  },
+  "scripts": {
+    "start": "node bin/mobile-mcp-recipe-server.js",
+    "test": "node test/run-all-tests.js"
+  },
+  "keywords": [
+    "mcp",
+    "mobile-mcp",
+    "android",
+    "recipes",
+    "ghost-os",
+    "automation"
+  ],
+  "author": "loki77799u",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 2,
+  "name": "chatgpt-set-thinking-mode",
+  "description": "Verifies and configures Think Harder mode on ChatGPT Android prior to message submission",
+  "package_name": "com.openai.chatgpt",
+  "version": "1.0.0",
+  "validation_status": "validated",
+  "provenance": {
+    "author": "agent",
+    "created_at": "2026-11-14T02:00:00.000Z",
+    "notes": "Handles Free-plan auto-reset behavior where switch resets after each reply"
+  },
+  "params": {
+    "desired_state": {
+      "type": "string",
+      "description": "Desired thinking state: 'on' or 'off'",
+      "required": true,
+      "default": "on"
+    }
+  },
+  "preconditions": {
+    "package_foreground": "com.openai.chatgpt"
+  },
+  "steps": [
+    {
+      "id": 1,
+      "action": "helper_thinking_state",
+      "note": "Inspect composer indicator, toggle attachment menu if required, and verify final state",
+      "params": {
+        "desired_state": "{{desired_state}}"
+      }
+    }
+  ],
+  "on_failure": "stop"
+}

@@ -43,6 +43,15 @@ Run it against devices on your own machine, or against real iOS and Android devi
 
 https://github.com/user-attachments/assets/bb084777-beb3-4930-ae6f-8d3fe694ddde
 
+## 🧩 This fork: Recipe Extension
+
+This fork adds [`recipe-extension/`](recipe-extension/), a drop-in stdio proxy in front of Mobile MCP that lets
+agents **learn, save and replay app workflows ("recipes")** and automatically receive app-specific guidance
+when they open an app. It also adds verified text insertion (exact clipboard paste with read-back) and
+safety rules such as no automatic retry of uncertain sends. All 35 upstream tools pass through unchanged.
+
+See [`recipe-extension/README.md`](recipe-extension/README.md) for setup.
+
 ## 🚀 Quick start
 
 **Quick install** detects the MCP clients on this machine (Claude Code, Codex, Cursor, VS Code, Gemini CLI and more) and lets you pick which ones to configure:
