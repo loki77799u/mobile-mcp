@@ -91,6 +91,9 @@ async function runProxyCompatibilityTests() {
   for (const extTool of requiredExtensionTools) {
     assert.ok(toolNames.includes(extTool), `Extension tool '${extTool}' must be registered`);
   }
+  assert.strictEqual(toolsListRes.result.resultType, "complete", "tools/list must carry resultType for 2026-07-28 clients");
+  assert.strictEqual(toolsListRes.result.ttlMs, 0);
+  assert.strictEqual(toolsListRes.result.cacheScope, "private");
   console.log("  ✔ tools/list preserved upstream tools and registered all 10 extension tools");
 
   // Test 3: Upstream tool call passthrough

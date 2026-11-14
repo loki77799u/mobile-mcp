@@ -327,6 +327,17 @@ class McpProxyServer extends EventEmitter {
   }
 
   _writeToClient(message) {
+    // MCP protocol 2026-07-28 clients (e.g. Claude Code 2.1.293+) expect resultType on every result,
+    // plus cache hints on tools/list. Upstream omits them; older clients ignore the extra fields.
+    if (message && message.id !== undefined && message.result && typeof message.result === "object" &&
+        !Array.isArray(message.result) && message.result.resultType === undefined) {
+      const result = { ...message.result, resultType: "complete" };
+      if (Array.isArray(result.tools)) {
+        if (result.ttlMs === undefined) result.ttlMs = 0;
+        if (result.cacheScope === undefined) result.cacheScope = "private";
+      }
+      message = { ...message, result };
+    }
     const jsonStr = JSON.stringify(message);
     const data = Buffer.from(jsonStr, "utf8");
 
